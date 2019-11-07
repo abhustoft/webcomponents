@@ -1,4 +1,5 @@
 'use strict';
+import * as style from './one-dialog.module.less';
 
 class OneDialog extends HTMLElement {
     static get observedAttributes() {
@@ -9,6 +10,7 @@ class OneDialog extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.close = this.close.bind(this);
+        console.log(style, window.getComputedStyle(this));
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -36,72 +38,32 @@ class OneDialog extends HTMLElement {
     }
 
     render() {
+
         const { shadowRoot, template } = this;
         const templateNode = document.getElementById(template);
         if (templateNode) {
             const content = document.importNode(templateNode.content, true);
             shadowRoot.appendChild(content);
         } else {
-            shadowRoot.innerHTML = `<style>
-        .wrapper {
-          opacity: 0;
-          transition: visibility 0s, opacity 0.25s ease-in;
-        }
-        .wrapper:not(.open) {
-          visibility: hidden;
-        }
-        .wrapper.open {
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          height: 100vh;
-          position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-          opacity: 1;
-          visibility: visible;
-        }
-        .overlay {
-          background: rgba(0, 0, 0, 0.8);
-          height: 100%;
-          position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-          width: 100%;
-        }
-        .dialog {
-          background: #ffffff;
-          max-width: 600px;
-          padding: 1rem;
-          position: fixed;
-        }
-        button {
-          all: unset;
-          cursor: pointer;
-          font-size: 1.25rem;
-          position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-        button:focus {
-          border: 2px solid blue;
-        }
-      </style>
+            shadowRoot.innerHTML = `
       <div class="wrapper">
       <div class="overlay"></div>
         <div class="dialog" role="dialog" aria-labelledby="title" aria-describedby="content">
           <button class="close" aria-label="Close">✖️</button>
           <h1 id="title"><slot name="heading"></slot></h1>
           <div id="content" class="content">
-            <slot></slot>
+            <div class="myborder">
+                <slot></slot>
+            </div>
           </div>
         </div>
       </div>`;
         }
+
+        let link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('href', 'one-dialog.css');
+        shadowRoot.appendChild(link);
 
         shadowRoot.querySelector('button').addEventListener('click', this.close);
         shadowRoot.querySelector('.overlay').addEventListener('click', this.close);
@@ -165,4 +127,4 @@ customElements.define('one-dialog', OneDialog);
 const button = document.getElementById('launch-dialog');
 button.addEventListener('click', () => {
     document.querySelector('one-dialog').open = true;
-})
+});

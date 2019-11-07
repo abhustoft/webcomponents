@@ -6,11 +6,26 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier-base": "prettier --no-bracket-spacing --trailing-comma all --single-quote --tab-width 4 --jsx-bracket-same-line true `find .  -regex '.*\\.\\(js\\|jsx\\)'`",
-    "prettier": "npm run prettier-base -- --write"
+    "prettier": "npm run prettier-base -- --write",
+    "build": "npm run build:production",
+    "build:dev": "NODE_ENV=development webpack --mode development --config webpack.config.build.js --watch --progress",
+    "build:production": "webpack --mode production --config webpack.config.build.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "autoprefixer": "^9.7.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "less-loader": "^5.0.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }
