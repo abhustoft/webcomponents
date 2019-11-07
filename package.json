@@ -1,0 +1,16 @@
+{
+  "name": "web-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier-base": "prettier --no-bracket-spacing --trailing-comma all --single-quote --tab-width 4 --jsx-bracket-same-line true `find .  -regex '.*\\.\\(js\\|jsx\\)'`",
+    "prettier": "npm run prettier-base -- --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
