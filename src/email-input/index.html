@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Web Component</title>
+    </head>
+
+    <body>
+
+    <template id="email-template">
+        <input id="emailInput" type="email" placeholder="a template">
+        <label for="emailinput">a label</label>
+    </template>
+
+    <div id="emailID"></div>
+
+
+    <email-input></email-input>
+    <div id="emailShadow">This is in the slot</div>
+
+    <script type="text/javascript" src="../../target/build/js/email-input.js"></script>
+    </body>
+</html>

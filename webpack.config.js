@@ -3,10 +3,10 @@ const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: ['./src/bare/one-dialog'],
+    entry: {'email-input': './src/email-input/email-input', 'one-dialog':'./src/bare/one-dialog'},
     output: {
         path: path.join(__dirname, 'target/build/js'),
-        filename: 'build.js',
+        filename: '[name].js',
     },
     target: 'web',
     module: {
