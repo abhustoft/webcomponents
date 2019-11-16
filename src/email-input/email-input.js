@@ -1,8 +1,33 @@
 // --------- Custom element -------------------------------------------------------------
 
 class EmailInput extends HTMLElement {
+    static get observedAttributes() {
+        return ['open'];
+    }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+        console.log('attributeChangedCallback:', attrName, oldValue, newValue)
+        if (newValue !== oldValue) {
+            this[attrName] = this.hasAttribute(attrName);
+        }
+    }
+
+    get open() {
+        return this.hasAttribute('open');
+    }
+
+    set open(isOpen) {
+        if (isOpen) {
+            this.setAttribute('open', true);
+        } else {
+            this.removeAttribute('open');
+        }
+    }
+    
     connectedCallback() {
-        this.innerHTML = `<input placeholder="custom element" id="customInput"><label for="customInput">label</label>`;
+        const template = document.getElementById('email-template');
+        const node = document.importNode(template.content, true);
+        this.appendChild(node);
     }
 }
 customElements.define('email-input', EmailInput);

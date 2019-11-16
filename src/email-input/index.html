@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Web Component</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component</title>
+</head>
 
-    <body>
+<body>
 
-    <template id="email-template">
-        <input id="emailInput" type="email" placeholder="a template">
-        <label for="emailinput">a label</label>
-    </template>
+<template id="email-template">
+    <script>
+        const input = document.getElementById('emailInput');
+        input.addEventListener('click', event => {
+            input.classList.add('clicked');
+            alert(event);
+        });
+    </script>
+    <style>
+        #emailInput {
+            background: tomato;
+            border: 0;
+            border-radius: 4px;
+            color: white;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            padding: .5rem 1rem;
+        }
+        #emailInput.clicked {
+            background: mediumslateblue;
+        }
+        label {
+            border: 2px solid green;
+            border-radius: 4px;
+        }
+    </style>
+    <input id="emailInput" type="email" placeholder="a template">
+    <label for="emailInput">a label</label>
+</template>
+
+<div>A custom element using a template:</div>
+<email-input></email-input>
+<div>A shadow element:</div>
+<div id="emailShadow">This is in the slot</div>
+<div>A plain HTML template:</div>
+<div id="emailID"></div>
 
 
-    <email-input></email-input>
-    <div id="emailShadow">This is in the slot</div>
-    <div id="emailID"></div>
-
-
-
-    <script type="text/javascript" src="../../target/build/js/email-input.js"></script>
-    </body>
+<script type="text/javascript" src="../../target/build/js/email-input.js"></script>
+</body>
 </html>
