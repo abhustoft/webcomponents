@@ -1,9 +1,8 @@
-
 // --------- Custom element -------------------------------------------------------------
 
 class EmailInput extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `<input placeholder="custom element">`;
+        this.innerHTML = `<input placeholder="custom element" id="customInput"><label for="customInput">label</label>`;
     }
 }
 customElements.define('email-input', EmailInput);
@@ -16,7 +15,8 @@ shadowInput {
   color: white;
 }
 </style>
-<input id="shadowInput" placeholder="shadow"><slot></slot> after slot</input>`;
+<input id="shadowInput" placeholder="shadow">
+<label for="shadowInput"><slot></slot> After slot</label>`;
 
 
 // --------- HTML template ----------------------------------------------------------------
