@@ -9,10 +9,9 @@
 
 <template id="email-template">
     <script>
-        const input = document.getElementById('emailInput');
-        input.addEventListener('click', event => {
-            input.classList.add('clicked');
-            alert(event);
+        const inputFromTemplate = document.getElementById('emailInput');
+        inputFromTemplate.addEventListener('click', event => {
+            inputFromTemplate.classList.add('clicked');
         });
     </script>
     <style>
