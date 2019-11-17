@@ -2,29 +2,25 @@
 
 class EmailInput extends HTMLElement {
     static get observedAttributes() {
-        return ['hasContent'];
+        return ['content'];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         console.log('attributeChangedCallback:', attrName, oldValue, newValue)
-        if (newValue !== oldValue) {
-            console.log('attributeChangedCallback setting ', attrName, ' to ', newValue)
-            this[attrName] = newValue;
-        }
     }
 
-    get hasContent() {
-        return this.attributes.getNamedItem('hasContent').nodeValue;
+    get content() {
+        return this.attributes.getNamedItem('content').nodeValue;
     }
 
-    set hasContent(value) {
+    set content(value) {
         if (value) {
-            this.setAttribute('hasContent', value);
+            this.setAttribute('content', value);
         } else {
-            this.removeAttribute('hasContent');
+            this.removeAttribute('content');
         }
     }
-    
+
     connectedCallback() {
         const template = document.getElementById('email-template');
         const node = document.importNode(template.content, true);
@@ -34,14 +30,14 @@ class EmailInput extends HTMLElement {
 customElements.define('email-input', EmailInput);
 
 const myInput = document.querySelector('email-input');
-myInput.hasContent = 'All empty';
+myInput.content = 'All empty';
 
-setTimeout(() =>{console.log('Read attribute \'hasContent\':',myInput.hasContent)}, 3000)
+setTimeout(() =>{console.log('Read attribute \'content\':',myInput.content)}, 3000)
 
 
 const updateValue = (e) => {
    console.log('Input content:',e.target.value);
-   myInput.hasContent = 'Got some content';
+   myInput.content = 'Got some content';
 };
 myInput.addEventListener('input', updateValue);
 
