@@ -1,3 +1,5 @@
+import {defaultTemplate, redTemplate} from './email-input.templates';
+
 class EmailInput extends HTMLElement {
     static get observedAttributes() {
         return ['content', 'template'];
@@ -20,6 +22,10 @@ class EmailInput extends HTMLElement {
                     break;
             }
         }
+    }
+
+    connectedCallback() {
+        this.render();
     }
 
     get content() {
@@ -47,41 +53,20 @@ class EmailInput extends HTMLElement {
         this.render();
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
     render() {
         const {shadowRoot, template} = this;
         shadowRoot.innerHTML = '';
         const templateNode = document.getElementById(template);
+
         if (templateNode) {
             const content = document.importNode(templateNode.content, true);
             shadowRoot.appendChild(content);
         } else {
-            shadowRoot.innerHTML = `<style>
-        #emailInput {
-            background: lightseagreen;
-            border: 0;
-            border-radius: 8px;
-            color: white;
-            font-family: Helvetica;
-            font-size: 1rem;
-            padding: .5rem 1rem;
-        }
-        #emailInput.clicked {
-            background: mediumslateblue;
-        }
-        label {
-            border: 2px solid green;
-            border-radius: 4px;
-        }
-    </style>
-    <h1 id="title"><slot name="heading"></slot></h1>
-    <input id="emailInput" type="email" placeholder="a template">
-    <label for="emailInput">a label</label>
-    <footer><slot></slot></footer>
-`;
+            if (template === 'red-template') {
+                shadowRoot.innerHTML = redTemplate;
+            } else {
+                shadowRoot.innerHTML = defaultTemplate;
+            }
         }
 
         const inputFromTemplate = shadowRoot.getElementById('emailInput');
@@ -97,24 +82,3 @@ class EmailInput extends HTMLElement {
 }
 
 customElements.define('email-input', EmailInput);
-
-const myInput = document.querySelector('email-input');
-myInput.content = 'All empty';
-
-setTimeout(() => {
-    console.log('Read attribute \'content\':', myInput.content)
-}, 2000)
-
-
-setTimeout(() => {
-    myInput.template = 'internal';
-}, 4000)
-
-
-
-const updateValue = (e) => {
-    console.log('Input content:', e.target.shadowRoot.activeElement.value);
-    myInput.content = 'Got some content';
-};
-myInput.addEventListener('input', updateValue);
-

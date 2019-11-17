@@ -7,7 +7,7 @@
 
 <body>
 
-<template id="email-template">
+<template id="markup-template">
     <style>
         #emailInput {
             background: tomato;
@@ -26,15 +26,34 @@
             border-radius: 4px;
         }
     </style>
-    <input id="emailInput" type="email" placeholder="a template">
+    <input id="emailInput" type="email" placeholder="Markup template">
     <label for="emailInput">a label</label>
 </template>
 
-<email-input template="email-template">
+<template id="bare-template">
+    <style>
+        #emailInput {
+            background: deepskyblue;
+            border: 0;
+            border-radius: 18px;
+            color: white;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            padding: .5rem 1rem;
+        }
+        #emailInput.clicked {
+            background: mediumslateblue;
+        }
+    </style>
+    <input id="emailInput" type="email" placeholder="Bare template">
+</template>
+
+<email-input template="markup-template">
     <span slot="heading">Email input</span>
     <span>The end</span>
 </email-input>
 
 <script type="text/javascript" src="../../target/build/js/email-input.js"></script>
+<script type="text/javascript" src="../../target/build/js/email-app.js"></script>
 </body>
 </html>
