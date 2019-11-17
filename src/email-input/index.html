@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Web Component</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component</title>
+</head>
 
-    <body>
+<body>
 
-        <email-input></email-input>
+<template id="email-template">
+    <style>
+        #emailInput {
+            background: tomato;
+            border: 0;
+            border-radius: 4px;
+            color: white;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            padding: .5rem 1rem;
+        }
+        #emailInput.clicked {
+            background: mediumslateblue;
+        }
+        label {
+            border: 2px solid green;
+            border-radius: 4px;
+        }
+    </style>
+    <input id="emailInput" type="email" placeholder="a template">
+    <label for="emailInput">a label</label>
+</template>
 
-        <script type="text/javascript" src="../../target/build/js/email-input.js"></script>
-    </body>
+<email-input template="email-template">
+    <span slot="heading">Email input</span>
+    <span>The end</span>
+</email-input>
+
+<script type="text/javascript" src="../../target/build/js/email-input.js"></script>
+</body>
 </html>

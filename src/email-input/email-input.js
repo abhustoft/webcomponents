@@ -1,6 +1,6 @@
 class EmailInput extends HTMLElement {
     static get observedAttributes() {
-        return ['content'];
+        return ['content', 'template'];
     }
 
     constructor() {
@@ -10,7 +10,16 @@ class EmailInput extends HTMLElement {
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
-        console.log('attributeChangedCallback:', attrName, oldValue, newValue)
+        if (newValue !== oldValue) {
+            switch (attrName) {
+                case 'content':
+                    console.log('Changed content:', newValue)
+                    break;
+                case 'template':
+                    console.log('Changed template:', newValue)
+                    break;
+            }
+        }
     }
 
     get content() {
@@ -25,16 +34,39 @@ class EmailInput extends HTMLElement {
         }
     }
 
+    get template() {
+        return this.getAttribute('template');
+    }
+
+    set template(template) {
+        if (template) {
+            this.setAttribute('template', template);
+        } else {
+            this.removeAttribute('template');
+        }
+        this.render();
+    }
+
     connectedCallback() {
-        const {shadowRoot} = this;
-        shadowRoot.innerHTML = `<style>
+        this.render();
+    }
+
+    render() {
+        const {shadowRoot, template} = this;
+        shadowRoot.innerHTML = '';
+        const templateNode = document.getElementById(template);
+        if (templateNode) {
+            const content = document.importNode(templateNode.content, true);
+            shadowRoot.appendChild(content);
+        } else {
+            shadowRoot.innerHTML = `<style>
         #emailInput {
-            background: tomato;
+            background: lightseagreen;
             border: 0;
-            border-radius: 4px;
+            border-radius: 8px;
             color: white;
             font-family: Helvetica;
-            font-size: 1.5rem;
+            font-size: 1rem;
             padding: .5rem 1rem;
         }
         #emailInput.clicked {
@@ -45,8 +77,12 @@ class EmailInput extends HTMLElement {
             border-radius: 4px;
         }
     </style>
+    <h1 id="title"><slot name="heading"></slot></h1>
     <input id="emailInput" type="email" placeholder="a template">
-    <label for="emailInput">a label</label>`;
+    <label for="emailInput">a label</label>
+    <footer><slot></slot></footer>
+`;
+        }
 
         const inputFromTemplate = shadowRoot.getElementById('emailInput');
         inputFromTemplate.addEventListener('click', event => {
@@ -67,7 +103,13 @@ myInput.content = 'All empty';
 
 setTimeout(() => {
     console.log('Read attribute \'content\':', myInput.content)
-}, 3000)
+}, 2000)
+
+
+setTimeout(() => {
+    myInput.template = 'internal';
+}, 4000)
+
 
 
 const updateValue = (e) => {
