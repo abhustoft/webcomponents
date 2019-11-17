@@ -1,8 +1,12 @@
-// --------- Custom element -------------------------------------------------------------
-
 class EmailInput extends HTMLElement {
     static get observedAttributes() {
         return ['content'];
+    }
+
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+        //this.close = this.close.bind(this);
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -22,44 +26,53 @@ class EmailInput extends HTMLElement {
     }
 
     connectedCallback() {
-        const template = document.getElementById('email-template');
-        const node = document.importNode(template.content, true);
-        this.appendChild(node);
+        const {shadowRoot} = this;
+        shadowRoot.innerHTML = `<style>
+        #emailInput {
+            background: tomato;
+            border: 0;
+            border-radius: 4px;
+            color: white;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            padding: .5rem 1rem;
+        }
+        #emailInput.clicked {
+            background: mediumslateblue;
+        }
+        label {
+            border: 2px solid green;
+            border-radius: 4px;
+        }
+    </style>
+    <input id="emailInput" type="email" placeholder="a template">
+    <label for="emailInput">a label</label>`;
+
+        const inputFromTemplate = shadowRoot.getElementById('emailInput');
+        inputFromTemplate.addEventListener('click', event => {
+            inputFromTemplate.classList.add('clicked');
+        });
+
+    }
+
+    disconnectedCallback() {
+        // Clean up any event listeners, etc
     }
 }
+
 customElements.define('email-input', EmailInput);
 
 const myInput = document.querySelector('email-input');
 myInput.content = 'All empty';
 
-setTimeout(() =>{console.log('Read attribute \'content\':',myInput.content)}, 3000)
+setTimeout(() => {
+    console.log('Read attribute \'content\':', myInput.content)
+}, 3000)
 
 
 const updateValue = (e) => {
-   console.log('Input content:',e.target.value);
-   myInput.content = 'Got some content';
+    console.log('Input content:', e.target.shadowRoot.activeElement.value);
+    myInput.content = 'Got some content';
 };
 myInput.addEventListener('input', updateValue);
 
-
-// --------- Shadow root ----------------------------------------------------------------
-
-const shadowRoot = document.getElementById('emailShadow').attachShadow({ mode: 'open' });
-shadowRoot.innerHTML = `<style>
-shadowInput {
-  background: tomato;
-  color: white;
-}
-</style>
-<input id="shadowInput" placeholder="shadow">
-<label for="shadowInput"><slot></slot> After slot</label>`;
-
-
-// --------- HTML template ----------------------------------------------------------------
-
-// const emailFragment = document.getElementById('email-template');
-// const emailInstance = document.importNode(emailFragment.content, true);
-// emailInstance.querySelector('label').innerHTML = 'the label text';
-// document.getElementById('emailID').appendChild(emailInstance);
-
-// ----------------------------------------------------------------------------------------
