@@ -3,21 +3,28 @@
     <head>
         <meta charset="UTF-8">
         <title>Web Component</title>
+        <style>
+            .container {width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px;}
+            .button {text-align: center}
+            button {padding: 10px}
+        </style>
     </head>
 
     <body>
-        <div style="width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px">
-            <input-component id="first" template="dnb" label="En merkelapp"></input-component>
+        <div class="container">
+            <input-component id="first" template="dnb" label="En merkelapp"/>
         </div>
-        <div style="width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px">
-            <input-component id="second" template="dnb" label="En merkelapp" textLike="true"></input-component>
-        </div>        <div style="width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px">
-            <input-component id="third" template="dnb" label="En merkelapp" inline="true"></input-component>
+        <div class="container">
+            <input-component id="second" template="dnb" label="En merkelapp" textLike="true"/>
         </div>
-        </div>        <div style="width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px">
-            <input-component id="fourth" template="dnb" label="En merkelapp" dark="true"></input-component>
+        <div class="container">
+            <input-component id="third" template="dnb" label="En merkelapp" inline="true"/>
         </div>
-        <div style="text-align: center"><button id="changeTemplate" style="padding: 10px">Toggle template</button></div>
+        </div>
+        <div class="container">
+            <input-component id="fourth" template="dnb" label="En merkelapp" dark="true"/>
+        </div>
+        <div class="button" ><button id="changeTemplate">Toggle template</button></div>
 
 <!--        <email-input-shadow>-->
 <!--            <span slot="heading">Email input shadow</span>-->
