@@ -106,7 +106,7 @@ if (myInput) {
 }
 
  // setTimeout(() => {
- //     console.log('Read attribute \'content\':', myInput.content)
+ //     console.log('Read attribute \'content\':', firstInput.content)
  // }, 2000)
  //
 

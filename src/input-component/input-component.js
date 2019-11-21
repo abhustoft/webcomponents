@@ -6,31 +6,76 @@ import dnb from './templates/dnb-template';
 
 class InputComponent extends HTMLElement {
     static get observedAttributes() {
-        return ['content', 'template'];
+        return ['hasContent', 'template', 'textLike', 'inline', 'dark'];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (newValue !== oldValue) {
             switch (attrName) {
-                case 'content':
-                    console.log('Changed content:', newValue);
+                case 'hasContent':
+                    console.log('Changed hasContent:', newValue);
                     break;
                 case 'template':
                     console.log('Changed template:', newValue);
+                    break;
+                case 'textLike':
+                    console.log('Changed textLike:', newValue);
+                    break;
+                case 'inline':
+                    console.log('Changed inline:', newValue);
+                    break;
+                case 'dark':
+                    console.log('Changed dark:', newValue);
                     break;
             }
         }
     }
 
-    get content() {
-        return this.attributes.getNamedItem('content').nodeValue;
+    get dark() {
+        return this.attributes.getNamedItem('dark') ? this.attributes.getNamedItem('dark').nodeValue : null;
     }
 
-    set content(value) {
+    set dark(value) {
         if (value) {
-            this.setAttribute('content', value);
+            this.setAttribute('dark', value);
         } else {
-            this.removeAttribute('content');
+            this.removeAttribute('dark');
+        }
+    }
+
+    get inline() {
+        return this.attributes.getNamedItem('inline') ? this.attributes.getNamedItem('inline').nodeValue : null;
+    }
+
+    set inline(value) {
+        if (value) {
+            this.setAttribute('inline', value);
+        } else {
+            this.removeAttribute('inline');
+        }
+    }
+
+    get textLike() {
+        return this.attributes.getNamedItem('textLike') ? this.attributes.getNamedItem('textLike').nodeValue : null;
+    }
+
+    set textLike(value) {
+        if (value) {
+            this.setAttribute('textLike', value);
+        } else {
+            this.removeAttribute('textLike');
+        }
+    }
+
+    get hasContent() {
+        return this.attributes.getNamedItem('hasContent').nodeValue;
+    }
+
+    set hasContent(value) {
+        if (value) {
+            this.setAttribute('hasContent', value);
+        } else {
+            this.removeAttribute('hasContent');
         }
     }
 
@@ -65,16 +110,16 @@ class InputComponent extends HTMLElement {
     }
 
     render() {
-        const {template, label} = this;
+        const {template, label, textLike, inline, dark} = this;
         const templateNode = document.getElementById(template);
         const placeholder = 'A placeholder';
 
         if (templateNode) {
-            const content = document.importNode(templateNode.content, true);
-            this.appendChild(content);
+            const hasContent = document.importNode(templateNode.hasContent, true);
+            this.appendChild(hasContent);
         } else {
             if (template === 'sb1') {
-                this.innerHTML = sb1(label, placeholder);
+                this.innerHTML = sb1(label, placeholder, textLike, inline, dark);
             } else {
                 this.innerHTML = dnb(label, placeholder);
             }
