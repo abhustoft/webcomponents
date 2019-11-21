@@ -8,35 +8,29 @@ firstInput.hasContent = 'no';
 setTimeout(() => {
     console.log('Read attribute \'hasContent\':', firstInput.hasContent)
 }, 2000);
-setTimeout(() => {
-    firstInput.template = 'sb1';
-}, 4000);
 firstInput.addEventListener('input', updateValue);
 
 const secInput = document.querySelector('#second');
 secInput.hasContent = 'no';
 secInput.textLike = true;
-setTimeout(() => {
-    secInput.template = 'sb1';
-}, 4000);
 secInput.addEventListener('input', updateValue);
 
 const thirdInput = document.querySelector('#third');
 thirdInput.hasContent = 'no';
 thirdInput.textLike = true;
-setTimeout(() => {
-    thirdInput.template = 'sb1';
-}, 4000);
-
 thirdInput.addEventListener('input', updateValue);
 
 
 const fourthInput = document.querySelector('#fourth');
 fourthInput.hasContent = 'no';
 fourthInput.textLike = true;
-setTimeout(() => {
-    fourthInput.template = 'sb1';
-}, 4000);
-
 fourthInput.addEventListener('input', updateValue);
 
+
+const button = document.querySelector('#changeTemplate');
+button.onclick = () => {
+    firstInput.template = firstInput.template === 'sb1'? 'dnb' : 'sb1';
+    secInput.template = secInput.template === 'sb1'? 'dnb' : 'sb1';
+    thirdInput.template = thirdInput.template === 'sb1'? 'dnb' : 'sb1';
+    fourthInput.template = fourthInput.template === 'sb1'? 'dnb' : 'sb1';
+};
