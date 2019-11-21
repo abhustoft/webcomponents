@@ -66,9 +66,6 @@ class InputComponent extends HTMLElement {
 
     render() {
         const {template, label} = this;
-
-        console.log('Render:', template, label)
-
         const templateNode = document.getElementById(template);
         const placeholder = 'A placeholder';
 
@@ -96,23 +93,3 @@ class InputComponent extends HTMLElement {
 }
 
 customElements.define('input-component', InputComponent);
-
-const myInput = document.querySelector('input-component');
-myInput.content = 'All empty';
-
-setTimeout(() => {
-    console.log('Read attribute \'content\':', myInput.content)
-}, 2000);
-
-
-setTimeout(() => {
-    myInput.template = 'sb1';
-}, 4000);
-
-
-const updateValue = (e) => {
-    console.log('Input content:', e.target.value);
-    myInput.content = 'Got some content';
-};
-myInput.addEventListener('input', updateValue);
-

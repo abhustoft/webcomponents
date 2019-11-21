@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: {'input-component': './src/input-component/input-component','email-input-shadow': './src/email-input/email-input-shadow', 'one-dialog':'./src/bare/one-dialog'},
+    entry: {'app': './src/app', 'input-component': './src/input-component/input-component','email-input-shadow': './src/email-input/email-input-shadow', 'one-dialog':'./src/bare/one-dialog'},
     output: {
         path: path.join(__dirname, 'target/build/js'),
         filename: '[name].js',
