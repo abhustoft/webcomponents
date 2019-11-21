@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Web Component</title>
-</head>
-
-<body>
-
-<template id="email-template">
-    <style>
+const template = () => {
+    return `<style>
         #emailInput {
             background: tomato;
             border: 0;
@@ -27,14 +18,6 @@
         }
     </style>
     <input id="emailInput" type="email" placeholder="a template">
-    <label for="emailInput">a label</label>
-</template>
-
-<email-input template="email-template">
-    <span slot="heading">Email input</span>
-    <span>The end</span>
-</email-input>
-
-<script type="text/javascript" src="../../target/build/js/email-input.js"></script>
-</body>
-</html>
+    <label for="emailInput">a label</label>`
+};
+export default template;

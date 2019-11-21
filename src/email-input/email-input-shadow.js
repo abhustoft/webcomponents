@@ -1,4 +1,6 @@
-class EmailInput extends HTMLElement {
+import * as shtmp from './templates/shadow-template';
+
+class EmailInputShadow extends HTMLElement {
     static get observedAttributes() {
         return ['content', 'template'];
     }
@@ -61,7 +63,7 @@ class EmailInput extends HTMLElement {
         } else {
             shadowRoot.innerHTML = `<style>
         #emailInput {
-            background: lightseagreen;
+            background: lightsteelblue;
             border: 0;
             border-radius: 8px;
             color: white;
@@ -96,19 +98,23 @@ class EmailInput extends HTMLElement {
     }
 }
 
-customElements.define('email-input', EmailInput);
+customElements.define('email-input-shadow', EmailInputShadow);
 
-const myInput = document.querySelector('email-input');
-myInput.content = 'All empty';
+const myInput = document.querySelector('email-input-shadow');
+if (myInput) {
+    myInput.content = 'All empty';
+}
 
-setTimeout(() => {
-    console.log('Read attribute \'content\':', myInput.content)
-}, 2000)
+ // setTimeout(() => {
+ //     console.log('Read attribute \'content\':', myInput.content)
+ // }, 2000)
+ //
 
-
-setTimeout(() => {
+//setTimeout(() => {
+if (myInput) {
     myInput.template = 'internal';
-}, 4000)
+}
+//}, 4000)
 
 
 
@@ -116,5 +122,7 @@ const updateValue = (e) => {
     console.log('Input content:', e.target.shadowRoot.activeElement.value);
     myInput.content = 'Got some content';
 };
-myInput.addEventListener('input', updateValue);
+if (myInput) {
+    myInput.addEventListener('input', updateValue);
+}
 
