@@ -134,6 +134,7 @@ class InputComponent extends HTMLElement {
 
     disconnectedCallback() {
         // Clean up any event listeners, etc
+        console.log('Clean up!');
     }
 }
 

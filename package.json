@@ -8,8 +8,9 @@
     "prettier-base": "prettier --no-bracket-spacing --trailing-comma all --single-quote --tab-width 4 --jsx-bracket-same-line true `find .  -regex '.*\\.\\(js\\|jsx\\)'`",
     "prettier": "npm run prettier-base -- --write",
     "build": "npm run build:production",
-    "build:dev": "NODE_ENV=development webpack --mode development --config webpack.config.build.js --watch --progress",
-    "build:production": "webpack --mode production --config webpack.config.build.js"
+    "build:dev": "cp src/index.html target/build; NODE_ENV=development webpack --mode development --config webpack.config.build.js --watch --progress",
+    "build:production": "cp src/index.html target/build; webpack --mode production --config webpack.config.build.js",
+    "server": "cd target/build; npx http-server --ssl --cert ../../server/cert.pem --key ../../server/key.pem"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
+    "http-server": "^0.12.0",
     "less-loader": "^5.0.0",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",

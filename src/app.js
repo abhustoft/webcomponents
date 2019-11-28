@@ -1,12 +1,12 @@
 const updateValue = (e) => {
-    console.log('The app got this from the input:', e.target.value);
+    console.log('The app got this from the input:', e.target, e.target.value);
     firstInput.hasContent = 'yes';
 };
 
 const firstInput = document.querySelector('#first');
 firstInput.hasContent = 'no';
 setTimeout(() => {
-    console.log('Read attribute \'hasContent\':', firstInput.hasContent)
+    console.log('Read attribute \'hasContent\' of #first component:', firstInput.hasContent)
 }, 2000);
 firstInput.addEventListener('input', updateValue);
 
@@ -29,8 +29,8 @@ fourthInput.addEventListener('input', updateValue);
 
 const button = document.querySelector('#changeTemplate');
 button.onclick = () => {
-    firstInput.template = firstInput.template === 'sb1'? 'dnb' : 'sb1';
-    secInput.template = secInput.template === 'sb1'? 'dnb' : 'sb1';
-    thirdInput.template = thirdInput.template === 'sb1'? 'dnb' : 'sb1';
-    fourthInput.template = fourthInput.template === 'sb1'? 'dnb' : 'sb1';
+    firstInput.template = firstInput.template === 'sb1' ? 'dnb' : 'sb1';
+    secInput.template = secInput.template === 'sb1' ? 'dnb' : 'sb1';
+    thirdInput.template = thirdInput.template === 'sb1' ? 'dnb' : 'sb1';
+    fourthInput.template = fourthInput.template === 'sb1' ? 'dnb' : 'sb1';
 };
