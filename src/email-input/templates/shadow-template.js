@@ -18,6 +18,6 @@ const template = () => {
         }
     </style>
     <input id="emailInput" type="email" placeholder="a template">
-    <label for="emailInput">a label</label>`
+    <label for="emailInput">a label</label>`;
 };
 export default template;

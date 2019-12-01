@@ -3,7 +3,6 @@ import style from './input-component.module.less';
 import sb1 from './templates/sb1-template';
 import dnb from './templates/dnb-template';
 
-
 class InputComponent extends HTMLElement {
     static get observedAttributes() {
         return ['hasContent', 'template', 'textLike', 'inline', 'dark'];
@@ -32,7 +31,9 @@ class InputComponent extends HTMLElement {
     }
 
     get dark() {
-        return this.attributes.getNamedItem('dark') ? this.attributes.getNamedItem('dark').nodeValue : null;
+        return this.attributes.getNamedItem('dark')
+            ? this.attributes.getNamedItem('dark').nodeValue
+            : null;
     }
 
     set dark(value) {
@@ -44,7 +45,9 @@ class InputComponent extends HTMLElement {
     }
 
     get inline() {
-        return this.attributes.getNamedItem('inline') ? this.attributes.getNamedItem('inline').nodeValue : null;
+        return this.attributes.getNamedItem('inline')
+            ? this.attributes.getNamedItem('inline').nodeValue
+            : null;
     }
 
     set inline(value) {
@@ -56,7 +59,9 @@ class InputComponent extends HTMLElement {
     }
 
     get textLike() {
-        return this.attributes.getNamedItem('textLike') ? this.attributes.getNamedItem('textLike').nodeValue : null;
+        return this.attributes.getNamedItem('textLike')
+            ? this.attributes.getNamedItem('textLike').nodeValue
+            : null;
     }
 
     set textLike(value) {
@@ -115,11 +120,20 @@ class InputComponent extends HTMLElement {
         const placeholder = 'A placeholder';
 
         if (templateNode) {
-            const hasContent = document.importNode(templateNode.hasContent, true);
+            const hasContent = document.importNode(
+                templateNode.hasContent,
+                true,
+            );
             this.appendChild(hasContent);
         } else {
             if (template === 'sb1') {
-                this.innerHTML = sb1(label, placeholder, textLike, inline, dark);
+                this.innerHTML = sb1(
+                    label,
+                    placeholder,
+                    textLike,
+                    inline,
+                    dark,
+                );
             } else {
                 this.innerHTML = dnb(label, placeholder);
             }
@@ -129,7 +143,6 @@ class InputComponent extends HTMLElement {
         inputFromTemplate.addEventListener('click', event => {
             inputFromTemplate.classList.add('clicked');
         });
-
     }
 
     disconnectedCallback() {

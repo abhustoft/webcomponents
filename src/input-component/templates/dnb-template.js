@@ -7,6 +7,6 @@ const sb1 = (label, placeholder) => {
         <input id="inputComp" type="email" placeholder="${placeholder}">
         <label for="inputComp">${label}</label><p>kdddooookkk</p>
     </div>
-`
+`;
 };
 export default sb1;

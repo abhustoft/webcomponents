@@ -8,7 +8,7 @@ class OneDialog extends HTMLElement {
 
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.attachShadow({mode: 'open'});
         this.close = this.close.bind(this);
         console.log(style, window.getComputedStyle(this));
     }
@@ -33,13 +33,16 @@ class OneDialog extends HTMLElement {
     }
 
     disconnectedCallback() {
-        this.shadowRoot.querySelector('button').removeEventListener('click', this.close);
-        this.shadowRoot.querySelector('.overlay').removeEventListener('click', this.close);
+        this.shadowRoot
+            .querySelector('button')
+            .removeEventListener('click', this.close);
+        this.shadowRoot
+            .querySelector('.overlay')
+            .removeEventListener('click', this.close);
     }
 
     render() {
-
-        const { shadowRoot, template } = this;
+        const {shadowRoot, template} = this;
         const templateNode = document.getElementById(template);
         if (templateNode) {
             const content = document.importNode(templateNode.content, true);
@@ -65,8 +68,12 @@ class OneDialog extends HTMLElement {
         link.setAttribute('href', 'one-dialog.css');
         shadowRoot.appendChild(link);
 
-        shadowRoot.querySelector('button').addEventListener('click', this.close);
-        shadowRoot.querySelector('.overlay').addEventListener('click', this.close);
+        shadowRoot
+            .querySelector('button')
+            .addEventListener('click', this.close);
+        shadowRoot
+            .querySelector('.overlay')
+            .addEventListener('click', this.close);
         this.open = this.open;
     }
 
@@ -78,7 +85,6 @@ class OneDialog extends HTMLElement {
         return this.getAttribute('template');
     }
 
-
     set template(template) {
         if (template) {
             this.setAttribute('template', template);
@@ -89,9 +95,11 @@ class OneDialog extends HTMLElement {
     }
 
     set open(isOpen) {
-        const { shadowRoot } = this;
+        const {shadowRoot} = this;
         shadowRoot.querySelector('.wrapper').classList.toggle('open', isOpen);
-        shadowRoot.querySelector('.wrapper').setAttribute('aria-hidden', !isOpen);
+        shadowRoot
+            .querySelector('.wrapper')
+            .setAttribute('aria-hidden', !isOpen);
         if (isOpen) {
             this._wasFocused = document.activeElement;
             this.setAttribute('open', '');
@@ -99,13 +107,14 @@ class OneDialog extends HTMLElement {
             this.focus();
             shadowRoot.querySelector('button').focus();
         } else {
-            this._wasFocused && this._wasFocused.focus && this._wasFocused.focus();
+            this._wasFocused &&
+                this._wasFocused.focus &&
+                this._wasFocused.focus();
             this.removeAttribute('open');
             document.removeEventListener('keydown', this._watchEscape);
             this.close();
         }
     }
-
 
     close() {
         if (this.open !== false) {

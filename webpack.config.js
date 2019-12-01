@@ -5,10 +5,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        'app': './src/app',
+        app: './src/app',
         'input-component': './src/input-component/input-component',
         'email-input-shadow': './src/email-input/email-input-shadow',
-        'one-dialog': './src/bare/one-dialog'
+        'one-dialog': './src/bare/one-dialog',
     },
     devServer: {
         contentBase: './target/build',
@@ -76,7 +76,8 @@ module.exports = {
         }),
         new CopyPlugin([
             {
-                from: './src/index.html', to: './',
+                from: './src/index.html',
+                to: './',
             },
         ]),
     ],

@@ -15,10 +15,10 @@ class EmailInputShadow extends HTMLElement {
         if (newValue !== oldValue) {
             switch (attrName) {
                 case 'content':
-                    console.log('Changed content:', newValue)
+                    console.log('Changed content:', newValue);
                     break;
                 case 'template':
-                    console.log('Changed template:', newValue)
+                    console.log('Changed template:', newValue);
                     break;
             }
         }
@@ -90,7 +90,6 @@ class EmailInputShadow extends HTMLElement {
         inputFromTemplate.addEventListener('click', event => {
             inputFromTemplate.classList.add('clicked');
         });
-
     }
 
     disconnectedCallback() {
@@ -105,10 +104,10 @@ if (myInput) {
     myInput.content = 'All empty';
 }
 
- // setTimeout(() => {
- //     console.log('Read attribute \'content\':', firstInput.content)
- // }, 2000)
- //
+// setTimeout(() => {
+//     console.log('Read attribute \'content\':', firstInput.content)
+// }, 2000)
+//
 
 //setTimeout(() => {
 if (myInput) {
@@ -116,13 +115,10 @@ if (myInput) {
 }
 //}, 4000)
 
-
-
-const updateValue = (e) => {
+const updateValue = e => {
     console.log('Input content:', e.target.shadowRoot.activeElement.value);
     myInput.content = 'Got some content';
 };
 if (myInput) {
     myInput.addEventListener('input', updateValue);
 }
-

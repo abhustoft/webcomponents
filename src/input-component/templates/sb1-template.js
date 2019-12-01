@@ -12,7 +12,7 @@ const sb1 = (label, placeholder, textLike, inline, dark) => {
     <label for="inputComp" class="ffe-form-label">${label}</label>
     <input id="inputComp" class="${className}" type="email" placeholder="${placeholder}">
     <h3 style="text-align: center">SB1 template</h3>
-    `
+    `;
 };
 
 export default sb1;

@@ -3,7 +3,6 @@ import style from './input-component.module.less';
 import sb1 from './templates/sb1-template';
 import dnb from './templates/dnb-template';
 
-
 class InputComponent extends HTMLElement {
     static get observedAttributes() {
         return ['content', 'template'];
@@ -67,7 +66,7 @@ class InputComponent extends HTMLElement {
     render() {
         const {template, label} = this;
 
-        console.log('Render:', template, label)
+        console.log('Render:', template, label);
 
         const templateNode = document.getElementById(template);
         const placeholder = 'A placeholder';
@@ -87,7 +86,6 @@ class InputComponent extends HTMLElement {
         inputFromTemplate.addEventListener('click', event => {
             inputFromTemplate.classList.add('clicked');
         });
-
     }
 
     disconnectedCallback() {
@@ -101,18 +99,15 @@ const myInput = document.querySelector('input-component');
 myInput.content = 'All empty';
 
 setTimeout(() => {
-    console.log('Read attribute \'content\':', myInput.content)
+    console.log("Read attribute 'content':", myInput.content);
 }, 2000);
-
 
 setTimeout(() => {
     myInput.template = 'sb1';
 }, 4000);
 
-
-const updateValue = (e) => {
+const updateValue = e => {
     console.log('Input content:', e.target.value);
     myInput.content = 'Got some content';
 };
 myInput.addEventListener('input', updateValue);
-
