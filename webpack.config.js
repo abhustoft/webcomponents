@@ -1,9 +1,20 @@
 const path = require('path');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: {'app': './src/app', 'input-component': './src/input-component/input-component','email-input-shadow': './src/email-input/email-input-shadow', 'one-dialog':'./src/bare/one-dialog'},
+    entry: {
+        'app': './src/app',
+        'input-component': './src/input-component/input-component',
+        'email-input-shadow': './src/email-input/email-input-shadow',
+        'one-dialog': './src/bare/one-dialog'
+    },
+    devServer: {
+        contentBase: './target/build',
+        publicPath: '/js/',
+        port: 9000,
+    },
     output: {
         path: path.join(__dirname, 'target/build/js'),
         filename: '[name].js',
@@ -14,7 +25,7 @@ module.exports = {
             {
                 // Less files that are not CSS modules
                 test: /^((?!module).)*.less$/,
-                loaders: [
+                loader: [
                     'style-loader',
                     'css-loader',
                     'postcss-loader',
@@ -63,6 +74,10 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
             },
         }),
-        new webpack.NoEmitOnErrorsPlugin(),
+        new CopyPlugin([
+            {
+                from: './src/index.html', to: './',
+            },
+        ]),
     ],
 };

@@ -5,7 +5,7 @@ const sb1 = (label, placeholder) => {
     <div>
         <div>DNB template</div>
         <input id="inputComp" type="email" placeholder="${placeholder}">
-        <label for="inputComp">${label}</label>
+        <label for="inputComp">${label}</label><p>kdddooookkk</p>
     </div>
 `
 };

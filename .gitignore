@@ -7,3 +7,6 @@ typings/
 .nyc_output
 .idea/
 src/domain/model/
+yarn.lock
+yarn-error.log
+package-lock.json
