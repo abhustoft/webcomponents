@@ -7,6 +7,7 @@ module.exports = {
     entry: {
         app: './src/app',
         'input-component': './src/input-component/input-component',
+        'input-component-old': './src/input-component/input-component-old',
         'email-input-shadow': './src/email-input/email-input-shadow',
         'one-dialog': './src/bare/one-dialog',
     },
