@@ -11,8 +11,17 @@
     </head>
 
     <body>
-        <div class="container">
-            <input-component id="first" template="dnb" label="En merkelapp"/>
+    <template id="template">
+                <style>label {background-color: gray; display: inline-block; padding: 50px}</style>
+                <div>
+                    <div>Local template</div>
+                    <input id="inputComp" type="email" placeholder="Local placeholder">
+                    <label for="inputComp">Local label</label><p>A local template</p>
+                </div>
+            </template>
+
+    <div class="container">
+            <input-component id="first" template="template" label="En merkelapp"/>
         </div>
         <div class="container">
             <input-component id="second" template="dnb" label="En merkelapp" textLike="true"/>

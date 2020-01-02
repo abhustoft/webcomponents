@@ -111,6 +111,7 @@ class InputComponent extends HTMLElement {
     }
 
     connectedCallback() {
+        //window.console.log('rendering')
         this.render();
     }
 
@@ -121,7 +122,7 @@ class InputComponent extends HTMLElement {
 
         if (templateNode) {
             const hasContent = document.importNode(
-                templateNode.hasContent,
+                templateNode.content,
                 true,
             );
             this.appendChild(hasContent);
@@ -140,9 +141,11 @@ class InputComponent extends HTMLElement {
         }
 
         const inputFromTemplate = document.getElementById('inputComp');
-        inputFromTemplate.addEventListener('click', event => {
-            inputFromTemplate.classList.add('clicked');
-        });
+        if (inputFromTemplate) {
+            inputFromTemplate.addEventListener('click', event => {
+                inputFromTemplate.classList.add('clicked');
+            });
+        }
     }
 
     disconnectedCallback() {
