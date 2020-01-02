@@ -1,11 +1,11 @@
 require('./input-component.less');
-import style from './input-component.module.less';
+//import style from './input-component.module.less';
 import sb1 from './templates/sb1-template';
 import dnb from './templates/dnb-template';
 
 class InputComponent extends HTMLElement {
     static get observedAttributes() {
-        return ['hasContent', 'template', 'textLike', 'inline', 'dark'];
+        return ['hasContent', 'template', 'textLike', 'inline', 'dark', 'placeholder'];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -26,7 +26,25 @@ class InputComponent extends HTMLElement {
                 case 'dark':
                     console.log('Changed dark:', newValue);
                     break;
+
+                case 'placeholder':
+                    console.log('Changed placeholder:', newValue);
+                    break;
             }
+        }
+    }
+
+    get placeholder() {
+        return this.attributes.getNamedItem('placeholder')
+            ? this.attributes.getNamedItem('placeholder').nodeValue
+            : null;
+    }
+
+    set placeholder(value) {
+        if (value) {
+            this.setAttribute('placeholder', value);
+        } else {
+            this.removeAttribute('placeholder');
         }
     }
 
@@ -116,31 +134,31 @@ class InputComponent extends HTMLElement {
     }
 
     render() {
-        const {template, label, textLike, inline, dark} = this;
+        const {template, label, textLike, inline, dark, placeholder} = this;
         const templateNode = document.getElementById(template);
-        const placeholder = 'A placeholder';
+        const _placeholder = placeholder ? placeholder : 'A placeholder';
 
         if (templateNode) {
-            const hasContent = document.importNode(
+            const node = document.importNode(
                 templateNode.content,
                 true,
             );
-            this.appendChild(hasContent);
+            this.appendChild(node);
         } else {
             if (template === 'sb1') {
                 this.innerHTML = sb1(
                     label,
-                    placeholder,
+                    _placeholder,
                     textLike,
                     inline,
                     dark,
                 );
             } else {
-                this.innerHTML = dnb(label, placeholder);
+                this.innerHTML = dnb(label, _placeholder);
             }
         }
 
-        const inputFromTemplate = document.getElementById('inputComp');
+        const inputFromTemplate = this.querySelector('input');
         if (inputFromTemplate) {
             inputFromTemplate.addEventListener('click', event => {
                 inputFromTemplate.classList.add('clicked');

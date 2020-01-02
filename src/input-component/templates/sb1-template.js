@@ -9,8 +9,8 @@ const sb1 = (label, placeholder, textLike, inline, dark) => {
     );
 
     return `<style>.ffe-input-field {width: inherit}.clicked {background-color: khaki}</style>
-    <label for="inputComp" class="ffe-form-label">${label}</label>
-    <input id="inputComp" class="${className}" type="email" placeholder="${placeholder}">
+    <label for="sb1" class="ffe-form-label">${label}</label>
+    <input name="sb1" class="${className}" type="email" placeholder="${placeholder}">
     <h3 style="text-align: center">SB1 template</h3>
     `;
 };

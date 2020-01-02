@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Web Component</title>
         <style>
-            .container {width: 90%; border: 1px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px;}
+            .container {width: 90%; border: 3px solid lightsalmon; border-radius: 4px; padding: 20px; margin: 10px;}
             .button {text-align: center}
             button {padding: 10px}
         </style>
@@ -12,11 +12,11 @@
 
     <body>
     <template id="template">
-                <style>label {background-color: gray; display: inline-block; padding: 50px}</style>
+                <style>#first label {background-color: cadetblue; display: inline-block; padding: 50px}</style>
                 <div>
                     <div>Local template</div>
-                    <input id="inputComp" type="email" placeholder="Local placeholder">
-                    <label for="inputComp">Local label</label><p>A local template</p>
+                    <input id="templateInput" type="email" placeholder="Local placeholder">
+                    <label for="templateInput">Local label</label><p>A local template</p>
                 </div>
             </template>
 
@@ -24,7 +24,7 @@
             <input-component id="first" template="template" label="En merkelapp"/>
         </div>
         <div class="container">
-            <input-component id="second" template="dnb" label="En merkelapp" textLike="true"/>
+            <input-component id="second" template="dnb" label="En merkelapp" textLike="true" placeholder="Legg på en krone"/>
         </div>
         <div class="container">
             <input-component id="third" template="dnb" label="En merkelapp" inline="true"/>
